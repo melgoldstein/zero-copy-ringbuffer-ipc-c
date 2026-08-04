@@ -1,0 +1,16 @@
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+dist/
+*.egg-info/
+*.exe
+*.dll
+*.so
+*.o
+.env
+.DS_Store
+throughput_bench
+test_ring
+test_ipc

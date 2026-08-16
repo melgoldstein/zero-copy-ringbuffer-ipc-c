@@ -1,0 +1,13 @@
+name: verification
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - run: make CC=${{ matrix.compiler }} all test ipc
+      - run: ./throughput_bench
+      - run: make test CFLAGS='-O1 -g -std=c99 -Wall -Wextra -Werror -Iinclude -fsanitize=address,undefined'

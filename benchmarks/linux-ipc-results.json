@@ -1,0 +1,10 @@
+{
+  "runner": "GitHub Actions ubuntu-latest x86-64",
+  "run_id": 40970677663,
+  "messages": 1000000,
+  "slot_bytes": 64,
+  "checked_payload_bytes": 16,
+  "timing": "CLOCK_MONOTONIC, including fork and wait",
+  "gcc": {"messages_per_second": 22164835, "microseconds_per_message": 0.045117},
+  "clang": {"messages_per_second": 20418042, "microseconds_per_message": 0.048976}
+}

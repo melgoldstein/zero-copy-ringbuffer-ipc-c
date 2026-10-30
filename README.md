@@ -67,3 +67,25 @@ includes fork and wait; CPU placement was not pinned. These numbers are a runner
 measurement, not a throughput guarantee on other hardware.
 
 MIT. The caller owns storage lifetime and is responsible for payload schema/version.
+
+## Producer and consumer API
+
+```c
+/* Producer: one successful reservation followed by one commit. */
+uint64_t *outgoing = spsc_reserve(ring);
+if (outgoing) {
+    outgoing[0] = sequence;
+    spsc_commit(ring);
+}
+/* Consumer: the pointer expires when this slot is released. */
+const uint64_t *incoming = spsc_peek(ring);
+if (incoming) {
+    handle_sequence(incoming[0]);
+    spsc_release(ring);
+}
+```
+
+Never put process-local pointers in shared slots. Use fixed-width scalar fields or
+offsets relative to a shared mapping. Do not retain a slot pointer after commit or
+release: the other process can reuse it. The caller must arrange mapping ownership,
+startup synchronization and shutdown. `tests/test_ipc.c` is a complete Linux example.

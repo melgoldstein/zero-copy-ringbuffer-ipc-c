@@ -1,5 +1,7 @@
 # Zero-copy SPSC ring buffer
 
+[Portfolio: melgoldstein.com](https://melgoldstein.com/)
+
 Fixed-capacity queue for one producer and one consumer in shared memory. Slots
 are accessed in place. The queue stores offsets implicitly, so mappings may live
 at different virtual addresses. No heap allocation occurs inside the library.
@@ -61,7 +63,7 @@ on placement and scheduling; `make ipc` prints its own wall-clock result on Linu
 | GCC | 22.16 million/s | 0.045117 |
 | Clang | 20.42 million/s | 0.048976 |
 
-[CI run 40970677663](https://github.com/cankaan120/zero-copy-ringbuffer-ipc-c/actions/runs/40970677663)
+[CI run 40970677663](https://github.com/melgoldstein/zero-copy-ringbuffer-ipc-c/actions/runs/40970677663)
 checked one million ordered messages with two payload words per slot. Wall time
 includes fork and wait; CPU placement was not pinned. These numbers are a runner
 measurement, not a throughput guarantee on other hardware.
